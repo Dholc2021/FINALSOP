@@ -1,0 +1,72 @@
+/* Welcome Screen Specific Styles */
+
+.welcome-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
+  
+  .welcome-content {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Rest of your CSS rules... */
+    @media screen and (max-width: 768px) {
+        .chatbot-logo {
+            width: 80px;
+            height: auto;
+        }
+        .message {
+            max-width: 95%;
+        }
+        .sidebar {
+            display: none;
+        }
+        .main-content {
+            width: 100%;
+        }
+    }
+    
+    /* Ensuring logo is properly placed */
+    .logo-header {
+        width: 50px;
+        height: auto;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    /* Improve contrast for better readability */
+    .main-content {
+        background-color: #000000;
+        color: #00ff7f;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    /* Improve text contrast */
+    .chat-title {
+        color: #00ff7f;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* Fix mobile responsiveness */
+    @media (max-width: 768px) {
+        .sidebar {
+            display: none;
+        }
+        .main-content {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+    

@@ -1,0 +1,70 @@
+/* General Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px; /* Bigger text */
+  font-weight: 700; /* Extra bold */
+  color: #00ff00; /* Neon green */
+  background-color: #000000; /* Black background for better contrast */
+}
+
+/* Sidebar Styles */
+.sidebar {
+  background: #111; /* Dark sidebar */
+  color: #ffffff;
+}
+
+.sidebar .history-item span {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff; /* White text */
+}
+
+.sidebar-footer span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Chat Messages */
+.messages-container {
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.message-content p, .message-content ul {
+  font-size: 18px;
+  font-weight: 700; /* Bolder text */
+  color: #00ff00; /* Neon green */
+}
+
+/* Input Box */
+#user-input {
+  background: #222; /* Darker input background */
+  color: #ffffff; /* White text */
+  font-size: 18px;
+  font-weight: 700; /* Bolder text */
+  border: 2px solid #00ff00; /* Green border */
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* Buttons */
+.new-chat-btn span {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+button {
+  background: #00ff00;
+  color: #000;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00cc00;
+}
