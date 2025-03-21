@@ -34,12 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const avatarDiv = document.createElement('div');
     avatarDiv.classList.add('avatar');
     
-    const iconElement = document.createElement('i');
     if (sender === 'user') {
-      iconElement.classList.add('fa-solid', 'fa-user');
-    } else {
-      iconElement.classList.add('fa-solid', 'fa-robot');
-    }
+  const iconElement = document.createElement('i');
+  iconElement.classList.add('fa-solid', 'fa-user');
+  avatarDiv.appendChild(iconElement);
+} else {
+  const logoImg = document.createElement('img');
+  logoImg.src = 'SOP Logo (Custom).png';
+  logoImg.alt = 'SOP Assistant Logo';
+  avatarDiv.appendChild(logoImg);
+}
     
     avatarDiv.appendChild(iconElement);
     
@@ -142,9 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const avatarDiv = document.createElement('div');
     avatarDiv.classList.add('avatar');
     
-    const iconElement = document.createElement('i');
-    iconElement.classList.add('fa-solid', 'fa-robot');
-    avatarDiv.appendChild(iconElement);
+    const logoImg = document.createElement('img');
+logoImg.src = 'SOP Logo (Custom).png';
+logoImg.alt = 'SOP Assistant Logo';
+avatarDiv.appendChild(logoImg);
     
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
