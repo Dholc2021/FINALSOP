@@ -6,41 +6,47 @@
   <title>SOP Bot Demo</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app-container">
     <aside class="sidebar">
       <div class="sidebar-header">
-        <button class="new-chat-btn"><span><i class="fa-solid fa-plus"></i> New chat</span></button>
+        <button class="new-chat-btn">
+          <span><i class="fa-solid fa-plus"></i> New chat</span>
+        </button>
       </div>
       <div class="sidebar-content">
         <div class="chat-history">
           <div class="history-heading">History</div>
-          <div class="history-item active"><i class="fa-regular fa-message"></i><span>Customer Onboarding Process</span></div>
-          <div class="history-item"><i class="fa-regular fa-message"></i><span>Refund & Cancellation Policy</span></div>
-          <div class="history-item"><i class="fa-regular fa-message"></i><span>Support Request Training</span></div>
+          <div class="history-item active"><i class="fa-regular fa-message"></i> Customer Onboarding Process</div>
+          <div class="history-item"><i class="fa-regular fa-message"></i> Refund & Cancellation Policy</div>
+          <div class="history-item"><i class="fa-regular fa-message"></i> Support Request Training</div>
         </div>
       </div>
       <div class="sidebar-footer">
         <div class="user-info">
+          <img src="assets/SOP-Bot-Logo.png" alt="SOP Assistant Logo" class="chatbot-logo">
           <span>SOP Assistant V2</span>
         </div>
       </div>
     </aside>
+
     <main class="main-content">
-      <div class="chat-header">
-        <div class="chat-title">SOP Assistant</div>
-      </div>
+      <div class="chat-header"><div class="chat-title">SOP Assistant</div></div>
       <div class="chat-container">
-        <div class="messages-container" id="messages-container">
+        <div class="messages-container">
           <div class="message assistant">
+            <div class="avatar"><img src="assets/SOP-Bot-Logo.png" alt="SOP Assistant Logo" class="chatbot-logo"></div>
             <div class="message-content">
               <p>Hello! I'm your SOP Assistant. I can help you with information about our Standard Operating Procedures.</p>
+              <p>Here are some topics I can assist you with:</p>
               <ul>
                 <li>Customer Onboarding Process</li>
                 <li>Refund & Cancellation Procedures</li>
-                <li>Customer Support Guidelines</li>
+                <li>Customer Support Guidelines (including high-priority requests)</li>
                 <li>Employee Onboarding Steps</li>
               </ul>
               <p>How can I assist you today?</p>
@@ -49,13 +55,14 @@
         </div>
         <div class="input-container">
           <form id="chat-form">
-            <input type="text" id="user-input" placeholder="Ask about SOPs..." autocomplete="off">
-            <button type="submit" id="send-button"><i class="fa-solid fa-paper-plane"></i></button>
+            <div class="input-wrapper">
+              <input type="text" id="user-input" placeholder="Ask about SOPs..." autocomplete="off">
+              <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
           </form>
         </div>
       </div>
     </main>
   </div>
-  <script src="app.js"></script>
 </body>
 </html>
