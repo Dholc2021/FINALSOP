@@ -451,3 +451,118 @@ body {
     width: 100%;
   }
 }
+
+/* Add these rules to the bottom of your styles.css file */
+
+/* Mobile Responsiveness - Portrait Mode */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  
+  .app-container {
+    flex-direction: column;
+  }
+  
+  .main-content {
+    width: 100%;
+  }
+  
+  /* Improve message display on small screens */
+  .message {
+    max-width: 100%;
+  }
+  
+  /* Make example chips stack better */
+  .example-chips {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .example-chip {
+    width: 100%;
+  }
+  
+  /* Adjust header for small screens */
+  .chat-header {
+    padding: 10px;
+  }
+  
+  /* Adjust input container for small screens */
+  .input-container {
+    padding: 10px;
+  }
+  
+  /* Make message content full width */
+  .message-content {
+    width: 100%;
+  }
+  
+  /* Reduce avatar size on mobile */
+  .avatar {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+  
+  /* Adjust suggestion buttons */
+  .suggestions-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .suggestion-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Portrait mode for very small screens (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .message {
+    gap: 8px;
+  }
+  
+  .avatar {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
+  
+  .message-content {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .chat-title {
+    font-size: 16px;
+  }
+  
+  .footer-text {
+    font-size: 12px;
+  }
+}
+
+/* Handle the message position on mobile */
+@media (max-width: 768px) {
+  .message.user, .message.assistant {
+    max-width: 90%;
+  }
+  
+  /* Fix issue with message bubbles being too wide */
+  .message.user {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+  
+  .message.assistant {
+    margin-right: 0;
+    align-self: flex-start;
+  }
+  
+  /* Fix scrolling on mobile */
+  .messages-container {
+    height: calc(100vh - 180px);
+    padding: 10px;
+  }
+}
