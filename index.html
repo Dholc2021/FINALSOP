@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOP Assistant V2</title>
+  <title>SOP Assistant - Hometowne Studios By RedRoof</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +15,15 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <button class="new-chat-btn">
-          <span><i class="fa-solid fa-plus"></i> New chat</span>
+        <img src="SOP-Bot-Logo-2.png" alt="SOP Bot" class="bot-logo">
+      </div>
+
+      <div class="sidebar-buttons">
+        <button class="sidebar-button" id="new-chat-btn">
+          <i class="fa-solid fa-plus"></i> New Chat
+        </button>
+        <button class="sidebar-button" id="history-btn">
+          <i class="fa-solid fa-history"></i> Chat History
         </button>
       </div>
 
@@ -40,8 +47,8 @@
 
       <div class="sidebar-footer">
         <div class="user-info">
-          <img src="SOP Logo (Custom).png" alt="SOP Assistant Logo">
-          <span>SOP Assistant V2</span>
+          <i class="fa-solid fa-robot"></i>
+          <span>SOP Assistant</span>
         </div>
       </div>
     </aside>
@@ -52,12 +59,69 @@
         <div class="chat-title">SOP Assistant</div>
       </div>
 
-      <!-- Sample Questions (Only One!) -->
-      <div class="sample-questions">
-        <p style="color: #00FF00;">What is the customer onboarding process?</p>
-        <p style="color: #00FF00;">How do I handle a refund request?</p>
+      <div class="chat-container">
+        <div class="messages-container" id="messages-container">
+          <!-- Welcome Message -->
+          <div class="message assistant">
+            <div class="avatar">
+              <img src="SOP-Bot-Logo-2.png" alt="SOP Bot" class="bot-avatar">
+            </div>
+            <div class="message-content">
+              <p>Hello! I'm your SOP Assistant. I can help you with information about our Standard Operating Procedures.</p>
+              <p>Here are some topics I can assist you with:</p>
+              <ul>
+                <li>Customer Onboarding Process</li>
+                <li>Refund & Cancellation Procedures</li>
+                <li>Customer Support Guidelines (including high-priority requests)</li>
+                <li>Employee Onboarding Steps</li>
+              </ul>
+              <p>How can I assist you today?</p>
+            </div>
+          </div>
+          
+          <!-- Messages will be added here dynamically -->
+        </div>
+
+        <!-- Example Questions -->
+        <div class="example-questions" id="example-questions">
+          <div class="example-heading">Try asking about:</div>
+          <div class="example-chips">
+            <div class="example-chip" onclick="selectExample('How can I process a refund?')">
+              How can I process a refund?
+            </div>
+            <div class="example-chip" onclick="selectExample('What are the steps for customer onboarding?')">
+              What are the steps for customer onboarding?
+            </div>
+            <div class="example-chip" onclick="selectExample('What should I expect on my first day as a new employee?')">
+              What should I expect on my first day as a new employee?
+            </div>
+            <div class="example-chip" onclick="selectExample('What is our pricing policy?')">
+              What is our pricing policy?
+            </div>
+          </div>
+        </div>
+
+        <div class="input-container">
+          <form id="chat-form">
+            <div class="input-wrapper">
+              <input type="text" id="user-input" placeholder="Ask about SOPs..." autocomplete="off">
+              <button type="submit" id="send-button">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
-      <!-- Chat Section -->
-      <div class="chat-container">
-        <div class="
+      <div class="chat-footer">
+        <div class="footer-text">
+          Welcome to Hometowne Studios By <span class="redroof-text">RedRoof</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="sopdata.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

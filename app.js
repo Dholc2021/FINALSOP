@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const userInput = document.getElementById('user-input');
   const chatForm = document.getElementById('chat-form');
   const sendButton = document.getElementById('send-button');
-  const newChatBtn = document.querySelector('.new-chat-btn');
+  const newChatBtn = document.getElementById('new-chat-btn');
+  const historyBtn = document.getElementById('history-btn');
+  const exampleQuestions = document.getElementById('example-questions');
 
   // Initialize chat history
   const chatHistory = [];
@@ -34,18 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const avatarDiv = document.createElement('div');
     avatarDiv.classList.add('avatar');
     
+    // Add different avatar based on sender
     if (sender === 'user') {
-  const iconElement = document.createElement('i');
-  iconElement.classList.add('fa-solid', 'fa-user');
-  avatarDiv.appendChild(iconElement);
-} else {
-  const logoImg = document.createElement('img');
-  logoImg.src = 'SOP Logo (Custom).png';
-  logoImg.alt = 'SOP Assistant Logo';
-  avatarDiv.appendChild(logoImg);
-}
-    
-    avatarDiv.appendChild(iconElement);
+      const iconElement = document.createElement('i');
+      iconElement.classList.add('fa-solid', 'fa-user');
+      avatarDiv.appendChild(iconElement);
+    } else {
+      // Use the SOP bot logo for assistant messages
+      const imgElement = document.createElement('img');
+      imgElement.src = 'SOP Bot Logo 2.png';
+      imgElement.alt = 'SOP Bot';
+      imgElement.classList.add('bot-avatar');
+      avatarDiv.appendChild(imgElement);
+    }
     
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
@@ -73,6 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Scroll to bottom
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    
+    // Hide example questions after first interaction
+    if (exampleQuestions) {
+      exampleQuestions.style.display = 'none';
+    }
   }
 
   // Enhanced formatting function for assistant messages
@@ -117,20 +125,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (message.includes('onboarding')) {
       formattedContent += `
         <div class="suggestions-container">
-          <button class="suggestion-btn" onclick="document.getElementById('user-input').value = 'What happens during training?'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));">What happens during training?</button>
-          <button class="suggestion-btn" onclick="document.getElementById('user-input').value = 'How long does onboarding take?'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));">How long does onboarding take?</button>
+          <button class="suggestion-btn" onclick="populateQuery('What happens during training?')">What happens during training?</button>
+          <button class="suggestion-btn" onclick="populateQuery('How long does onboarding take?')">How long does onboarding take?</button>
         </div>`;
     } else if (message.includes('refund')) {
       formattedContent += `
         <div class="suggestions-container">
-          <button class="suggestion-btn" onclick="document.getElementById('user-input').value = 'What if the customer is upset about the refund policy?'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));">What if the customer is upset?</button>
-          <button class="suggestion-btn" onclick="document.getElementById('user-input').value = 'How do I document a refund?'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));">How do I document a refund?</button>
+          <button class="suggestion-btn" onclick="populateQuery('What if the customer is upset about the refund policy?')">What if the customer is upset?</button>
+          <button class="suggestion-btn" onclick="populateQuery('How do I document a refund?')">How do I document a refund?</button>
         </div>`;
     } else if (message.includes('high-priority') || message.includes('support request')) {
       formattedContent += `
         <div class="suggestions-container">
-          <button class="suggestion-btn" onclick="document.getElementById('user-input').value = 'What defines a high-priority issue?'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));">What defines a high-priority issue?</button>
-          <button class="suggestion-btn" onclick="document.getElementById('user-input').value = 'Who handles escalated tickets?'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));">Who handles escalated tickets?</button>
+          <button class="suggestion-btn" onclick="populateQuery('What defines a high-priority issue?')">What defines a high-priority issue?</button>
+          <button class="suggestion-btn" onclick="populateQuery('Who handles escalated tickets?')">Who handles escalated tickets?</button>
         </div>`;
     }
     
@@ -146,10 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const avatarDiv = document.createElement('div');
     avatarDiv.classList.add('avatar');
     
-    const logoImg = document.createElement('img');
-logoImg.src = 'SOP Logo (Custom).png';
-logoImg.alt = 'SOP Assistant Logo';
-avatarDiv.appendChild(logoImg);
+    const imgElement = document.createElement('img');
+    imgElement.src = 'SOP-Bot-Logo-2.png';
+    imgElement.alt = 'SOP Bot';
+    imgElement.classList.add('bot-avatar');
+    avatarDiv.appendChild(imgElement);
     
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
@@ -327,36 +336,6 @@ Is there a particular part of the customer onboarding process you'd like more in
 Would you like specific guidance on handling any of these refund steps?`;
     }
     
-    // General support response
-    if (lowercaseInput.includes('support') || 
-        lowercaseInput.includes('help') || 
-        lowercaseInput.includes('issue') || 
-        lowercaseInput.includes('problem') || 
-        lowercaseInput.includes('ticket')) {
-      
-      return `According to our Customer Support Standard Operating Procedure (SOP), here's how to handle support requests:
-
-**Step 1: Receiving the Request**
-
-- Greet the customer professionally.
-- Ask for their name and account details.
-- Identify the issue and categorize it as Low, Medium, or High priority.
-
-**Step 2: Troubleshooting Process**
-
-- If the issue is account-related, verify their credentials and check the database.
-- If it's a technical issue, escalate to the IT team via the internal ticket system.
-- Provide an estimated resolution time based on the issue complexity.
-
-**Step 3: Resolution & Follow-up**
-
-- Confirm the issue is resolved before closing the ticket.
-- Send a follow-up email within 48 hours.
-- Collect customer feedback for quality improvement.
-
-Would you like more details about a specific part of this process?`;
-    }
-    
     // Employee onboarding response
     if (lowercaseInput.includes('employee') && 
         (lowercaseInput.includes('onboard') || lowercaseInput.includes('orientation') || 
@@ -391,16 +370,63 @@ Would you like more details about a specific part of this process?`;
 Would you like more information about any specific phase of the employee onboarding process?`;
     }
     
+    // Pricing policy response
+    if (lowercaseInput.includes('pricing') || lowercaseInput.includes('price') || 
+        lowercaseInput.includes('cost') || lowercaseInput.includes('rates')) {
+      
+      return `According to our Pricing Policy Standard Operating Procedure (SOP), here's our pricing structure at Hometowne Studios By RedRoof:
+
+**Step 1: Understanding Our Rates**
+
+- Standard rates vary by season:
+  - Peak season (June-August): $89.99-$119.99 per night
+  - Shoulder season (April-May, September-October): $69.99-$99.99 per night
+  - Off-peak season (November-March): $59.99-$89.99 per night
+
+**Step 2: Available Discounts**
+
+- Discounts available for:
+  - Extended stays (7+ nights): 10% discount
+  - Corporate partners: 15% discount
+  - Military and first responders: 10% discount
+  - Loyalty program members: 5-15% based on tier
+
+**Step 3: Additional Fees**
+
+- All rates are subject to local taxes
+- Daily facility fee: $10 per night
+- Pet fee (where applicable): $15 per night
+- Early check-in/late checkout: $25 when available
+
+**Step 4: Price Adjustments**
+
+- Managers can adjust rates based on occupancy and local competition
+- Special event rates may apply during high-demand periods
+- Group rates available for 5+ rooms
+
+Would you like more specific information about any aspect of our pricing policy?`;
+    }
+    
     // Default response if no specific match
     return `I can help you with information about our Standard Operating Procedures (SOPs). Here are some topics I can assist with:
 
 - Customer Onboarding Process
-- Refund & Cancellation Procedures 
+- Refund & Cancellation Procedures
 - Customer Support Guidelines (including high-priority requests)
 - Employee Onboarding Steps
+- Pricing Policies
 
 Could you please specify which procedure you'd like information about?`;
   }
+
+  // Function to populate query with example questions
+  function populateQuery(question) {
+    userInput.value = question;
+    userInput.focus();
+  }
+  
+  // Make the function globally available
+  window.populateQuery = populateQuery;
 
   // Event listener for form submission
   chatForm.addEventListener('submit', (e) => {
@@ -419,9 +445,21 @@ Could you please specify which procedure you'd like information about?`;
         messagesContainer.removeChild(messagesContainer.lastChild);
       }
       
+      // Show example questions again
+      if (exampleQuestions) {
+        exampleQuestions.style.display = 'block';
+      }
+      
       // Focus on the input
       userInput.value = '';
       userInput.focus();
+    });
+  }
+
+  // History button click
+  if (historyBtn) {
+    historyBtn.addEventListener('click', () => {
+      alert('Chat history feature would be displayed here');
     });
   }
 
@@ -430,30 +468,4 @@ Could you please specify which procedure you'd like information about?`;
 
   // Set focus to input field
   userInput.focus();
-});
-
-// For about page tab functionality
-document.addEventListener('DOMContentLoaded', () => {
-  const aboutNavItems = document.querySelectorAll('.about-nav-item');
-  const aboutSections = document.querySelectorAll('.about-section');
-  
-  if (aboutNavItems.length > 0) {
-    aboutNavItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const sectionId = item.getAttribute('data-section');
-        
-        // Update active class on nav items
-        aboutNavItems.forEach(navItem => {
-          navItem.classList.remove('active');
-        });
-        item.classList.add('active');
-        
-        // Update active class on sections
-        aboutSections.forEach(section => {
-          section.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
-      });
-    });
-  }
 });

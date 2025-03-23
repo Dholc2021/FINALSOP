@@ -1,0 +1,27 @@
+# Query: SOP Logo
+# ContextLines: 1
+
+7 results - 3 files
+
+app.js:
+   42    const logoImg = document.createElement('img');
+   43:   logoImg.src = 'SOP Logo 30x30.png';
+   44    logoImg.alt = 'SOP Assistant Logo';
+
+  149      const logoImg = document.createElement('img');
+  150: logoImg.src = 'SOP Logo 30x30.png';
+  151  logoImg.alt = 'SOP Assistant Logo';
+
+index.html:
+  42          <div class="user-info">
+  43:           <img src="SOP Logo 30x30.png" alt="SOP Assistant Logo">
+  44            <span>SOP Assistant V2</span>
+
+C:\Users\dholc\OneDrive\Desktop\FINALSOP\index.html:
+  42          <div class="user-info">
+  43:           <img src="SOP Logo 30x30.png"  alt="SOP logo">
+  44            <span>SOP Assistant V2</span>
+
+  59              <div class="avatar">
+  60:               <img src="SOP Logo 30x30.png"  alt="SOP logo">         </div>
+  61              <div class="message-content">
