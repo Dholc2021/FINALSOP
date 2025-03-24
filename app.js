@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
   const messagesContainer = document.getElementById('messages-container');
   const userInput = document.getElementById('user-input');
@@ -7,25 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const historyBtn = document.getElementById('history-btn');
   const exampleQuestions = document.getElementById('example-questions');
 
-  // Initialize chat history
-  const chatHistory = [];
-
-  // Check for URL query parameters
-  function checkUrlQuery() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const queryQuestion = urlParams.get('q');
-    
-    if (queryQuestion) {
-      // Set the input value
-      userInput.value = queryQuestion;
-      // Process the question
-      setTimeout(() => {
-        processUserInput(queryQuestion);
-        // Clear the URL parameter to prevent reprocessing on refresh
-        history.replaceState(null, '', window.location.pathname);
-      }, 500);
-    }
+  // Function to populate query with example questions
+  function populateQuery(question) {
+    userInput.value = question;
+    userInput.focus();
   }
+  
+  // Make the function globally available
+  window.populateQuery = populateQuery;
 
   // Function to add a message to the chat
   function addMessage(message, sender) {
@@ -53,12 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
     
-    // Save the message to history
-    chatHistory.push({
-      sender,
-      message
-    });
-    
     // Render message content
     if (sender === 'user') {
       contentDiv.textContent = message;
@@ -83,33 +67,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Enhanced formatting function for assistant messages
-  function formatAssistantMessage(message) {
+  // Formatting function for assistant messages
+  const formatAssistantMessage = (message) => {
     // First, handle step headings and their numbering
     message = message.replace(/\*\*(Step \d+:.*?)\*\*/g, '<h3>$1</h3>');
-    
+
     // Handle bold text that isn't steps
     message = message.replace(/\*\*((?!Step \d+:).*?)\*\*/g, '<strong>$1</strong>');
-    
+
     // Handle list items for better spacing and bullets
     let formattedContent = '';
     const paragraphs = message.split('\n\n');
-    
+
     for (let i = 0; i < paragraphs.length; i++) {
       const para = paragraphs[i];
-      
+
       if (para.startsWith('- ')) {
         // This is a list item
-        if (i > 0 && !paragraphs[i-1].startsWith('- ')) {
+        if (i > 0 && !paragraphs[i - 1].startsWith('- ')) {
           // Start a new list if previous paragraph wasn't a list item
           formattedContent += '<ul>';
         }
-        
+
         // Add the list item
         formattedContent += `<li>${para.substring(2)}</li>`;
-        
+
         // Check if next paragraph is not a list item to close the list
-        if (i === paragraphs.length - 1 || !paragraphs[i+1].startsWith('- ')) {
+        if (i === paragraphs.length - 1 || !paragraphs[i + 1].startsWith('- ')) {
           formattedContent += '</ul>';
         }
       } else if (para.startsWith('<h3>')) {
@@ -141,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <button class="suggestion-btn" onclick="populateQuery('Who handles escalated tickets?')">Who handles escalated tickets?</button>
         </div>`;
     }
-    
+
     return formattedContent;
-  }
+  };
 
   // Function to show typing indicator
   function showTypingIndicator() {
@@ -190,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to process user input and generate a response
   async function processUserInput(input) {
+    console.log("Processing input:", input);
     if (!input || input.trim() === '') return;
     
     // Disable input while processing
@@ -419,15 +404,6 @@ Would you like more specific information about any aspect of our pricing policy?
 Could you please specify which procedure you'd like information about?`;
   }
 
-  // Function to populate query with example questions
-  function populateQuery(question) {
-    userInput.value = question;
-    userInput.focus();
-  }
-  
-  // Make the function globally available
-  window.populateQuery = populateQuery;
-
   // Event listener for form submission
   chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -461,6 +437,23 @@ Could you please specify which procedure you'd like information about?`;
     historyBtn.addEventListener('click', () => {
       alert('Chat history feature would be displayed here');
     });
+  }
+
+  // Check for URL query parameters
+  function checkUrlQuery() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryQuestion = urlParams.get('q');
+    
+    if (queryQuestion) {
+      // Set the input value
+      userInput.value = queryQuestion;
+      // Process the question
+      setTimeout(() => {
+        processUserInput(queryQuestion);
+        // Clear the URL parameter to prevent reprocessing on refresh
+        history.replaceState(null, '', window.location.pathname);
+      }, 500);
+    }
   }
 
   // Initialize: Check for URL query

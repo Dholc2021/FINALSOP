@@ -124,5 +124,42 @@
 
   <script src="sopdata.js"></script>
   <script src="app.js"></script>
+  
+  <style>
+    .suggestion-btn {
+      cursor: pointer;
+      pointer-events: auto;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .suggestions-container {
+      position: relative;
+      z-index: 5;
+      pointer-events: auto;
+    }
+  </style>
+
+<script>
+  // Function to put text in input box but NOT submit
+  function selectExample(question) {
+    const userInput = document.getElementById('user-input');
+    if (userInput) {
+      userInput.value = question;
+      userInput.focus();
+    }
+  }
+  
+  // Handle clicks on suggestion buttons
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('suggestion-btn')) {
+      e.preventDefault();
+      selectExample(e.target.textContent.trim());
+    }
+  });
+  
+  // Make function globally available
+  window.populateQuery = selectExample;
+</script>
 </body>
 </html>
